@@ -20,14 +20,14 @@ def load_model(model_name, num_classes, model_path):
         )
     else:
         raise ValueError("Unknown model name")
-    
+
     model.load_state_dict(torch.load(model_path))
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
     model.eval()
     return model
 
-# Example usage:
+# Change to the other saved models
 model_name = 'ResNet50'
 num_classes = 10
 model_path = 'ResNet50_model.pth'

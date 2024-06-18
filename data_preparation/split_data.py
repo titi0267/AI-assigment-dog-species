@@ -3,12 +3,11 @@ import shutil
 import numpy as np
 from sklearn.model_selection import train_test_split
 
-# Define constants
-DATASET_DIR = './standardized_dataset'  # Path to your standardized dataset
-OUTPUT_DIR = './split_dataset'  # Path to save the split dataset
-TRAIN_RATIO = 0.7
-VAL_RATIO = 0.15
-TEST_RATIO = 0.15
+DATASET_DIR = './standardized_dataset'
+OUTPUT_DIR = './split_dataset'
+TRAIN_RATIO = 0.7 # 70% in train folder
+VAL_RATIO = 0.15 # 15% in validation folder
+TEST_RATIO = 0.15 # 15% in testing folder
 
 def create_dirs(base_dir):
     train_dir = os.path.join(base_dir, 'train')

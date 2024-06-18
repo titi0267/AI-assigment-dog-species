@@ -12,7 +12,7 @@ import seaborn as sns
 from sklearn.metrics import confusion_matrix
 
 
-# Set device
+# Gpu check before running training
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 print(f'Using device: {device}')
@@ -23,7 +23,7 @@ if torch.cuda.is_available():
 else:
     print('No CUDA device available. Using CPU.')
 
-# Define constants
+# Constants
 TRAIN_DIR = '../data_preparation/split_dataset/train'
 VAL_DIR = '../data_preparation/split_dataset/val'
 TEST_DIR = '../data_preparation/split_dataset/test'
@@ -94,6 +94,7 @@ def create_model(model_name):
     
     return model, criterion, optimizer
 
+# Training process
 def train_model(model, criterion, optimizer, num_epochs=25):
     since = time.time()
     history = {'train_loss': [], 'train_acc': [], 'val_loss': [], 'val_acc': []}
@@ -144,7 +145,7 @@ def train_model(model, criterion, optimizer, num_epochs=25):
     
     return model, history
 
-# Function to evaluate model
+# Function to evaluate model on test folder
 def evaluate_model(model):
     model.eval()
     all_labels = []
@@ -254,6 +255,6 @@ for model_name in models_list:
 for model_name, result in results.items():
     print(f'{model_name}: Accuracy: {result["accuracy"]}, mAP: {result["mAP"]}, Training Time: {result["training_time"]} seconds, Model Path: {result["model_path"]}')
 
-# Draw your conclusion
+# Conclusion based on time accuray and mAP
 best_model = max(results.items(), key=lambda x: (x[1]['accuracy'], x[1]['mAP']))[0]
 print(f'The best model for this classification task is {best_model} based on accuracy, mAP, and training time.')
